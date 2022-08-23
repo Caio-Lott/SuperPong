@@ -9,8 +9,6 @@ height = 10
 def CreateWindow():
     x = 250
     z = 250
-    control = 0
-    aux = 1
     # set title
     pygame.display.set_caption('Super Pong')
 
@@ -33,8 +31,10 @@ def CreateWindow():
 
         pygame.time.delay(10)
         screen.fill((0, 0, 0))
-        x, control = MoveUpperBar(x, control)
-        z, aux = MoveLowerBar(z, aux)
+        Ukey = pygame.key.get_pressed()
+        Bkey = pygame.key.get_pressed()
+        x = MoveUpperBar(x, Ukey)
+        z = MoveLowerBar(z, Bkey)
         pygame.display.update()
     # quit pygame after closing window
     pygame.quit()
@@ -57,39 +57,29 @@ def CreateBall():
     pygame.draw.circle(screen, (0, 255, 0),
                    [300, 400], 10, 0)
 
-def MoveUpperBar(x, control):
+def MoveUpperBar(x, Ukey):
     speed = 1
 
-    if x==0:
-        control = 1
-    if x==600-width:
-        control = 0
-
-    if control == 0:
+    if Ukey[pygame.K_LEFT] and x>0:
         x -= speed
 
-    if control == 1:
+    if Ukey[pygame.K_RIGHT] and x<600-width:
         x += speed
 
     CreateUpperBar(x)
-    return x, control
+    return x
 
-def MoveLowerBar(z, aux):
+def MoveLowerBar(z, Bkey):
     speed = 1
 
-    if z==0:
-        aux = 1
-    if z==600-width:
-        aux = 0
-
-    if aux == 0:
+    if Bkey[pygame.K_a] and z>0:
         z -= speed
 
-    if aux == 1:
+    if Bkey[pygame.K_d] and z<600-width:
         z += speed
 
     CreateLowerBar(z)
-    return z, aux
+    return z
 
 def main():
     CreateWindow()
