@@ -1,88 +1,45 @@
-import pygame 
+import pygame
+from Bar import Bar
 
-screen = pygame.display.set_mode((600, 800))
-UpperY = 10
-LowerY = 780
-width = 100
-height = 10
+pygame.init()
 
-def CreateWindow():
-    x = 250
-    z = 250
-    # set title
-    pygame.display.set_caption('Super Pong')
+BLACK = (0,0,0)
+WHITE = (255,255,255)
 
-    #set logo
-    Icon = pygame.image.load('logo.webp')
-    pygame.display.set_icon(Icon)
-    
-    CreateUpperBar(x)
-    CreateLowerBar(x)
-    CreateBall()
-    pygame.display.update()
+size = (500, 700)
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Super Pong")
 
-    # run window
-    running = True
-    while running:
-        for event in pygame.event.get():
-         
-            if event.type == pygame.QUIT:
-                running = False
+UpperBar = Bar(WHITE, 100, 10)
+UpperBar.rect.x = 200
+UpperBar.rect.y = 20
 
-        pygame.time.delay(10)
-        screen.fill((0, 0, 0))
-        Ukey = pygame.key.get_pressed()
-        Bkey = pygame.key.get_pressed()
-        x = MoveUpperBar(x, Ukey)
-        z = MoveLowerBar(z, Bkey)
-        pygame.display.update()
-    # quit pygame after closing window
-    pygame.quit()
+LowerBar = Bar(WHITE, 100, 10)
+LowerBar.rect.x = 200
+LowerBar.rect.y = 670
 
-def CreateUpperBar(x):
-    # Using draw.rect module of
-    # pygame to draw the solid rectangle
-    pygame.draw.rect(screen, (0,   255, 255),
-                    [x, UpperY, width, height])
+SpriteList = pygame.sprite.Group()
+SpriteList.add(UpperBar)
+SpriteList.add(LowerBar)
 
-def CreateLowerBar(x):
-    # Using draw.rect module of
-    # pygame to draw the solid rectangle
-    pygame.draw.rect(screen, (0,   0, 255),
-                    [x, LowerY, width, height], 0)
+running = True
+clock = pygame.time.Clock()
 
-def CreateBall():
-    # Using draw.rect module of
-    #pygame to draw the solid circle
-    pygame.draw.circle(screen, (0, 255, 0),
-                   [300, 400], 10, 0)
+while running:
 
-def MoveUpperBar(x, Ukey):
-    speed = 1
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-    if Ukey[pygame.K_LEFT] and x>0:
-        x -= speed
+    SpriteList.update()
 
-    if Ukey[pygame.K_RIGHT] and x<600-width:
-        x += speed
+    screen.fill(BLACK)
 
-    CreateUpperBar(x)
-    return x
+    pygame.draw.line(screen, WHITE, [0, 350], [500,350], 5)
 
-def MoveLowerBar(z, Bkey):
-    speed = 1
+    SpriteList.draw(screen)
 
-    if Bkey[pygame.K_a] and z>0:
-        z -= speed
+    pygame.display.flip()
+    clock.tick(60)
 
-    if Bkey[pygame.K_d] and z<600-width:
-        z += speed
-
-    CreateLowerBar(z)
-    return z
-
-def main():
-    CreateWindow()
-
-if __name__ == "__main__":
-    main()
+pygame.quit()
