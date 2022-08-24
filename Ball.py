@@ -13,7 +13,7 @@ class Ball(pygame.sprite.Sprite):
 
         pygame.draw.rect(self.image, color, [0, 0, width, height])
 
-        self.speed = [2, 2]
+        self.speed = [randint(2,4), randint(3,8)]
 
         self.rect = self.image.get_rect()
 
@@ -22,8 +22,8 @@ class Ball(pygame.sprite.Sprite):
         self.rect.y += self.speed[1]
 
     def hit(self):
-        self.speed[0] = -self.speed[0]
-        self.speed[1] = randint(-8,8)
+        self.speed[0] = randint(-8,8)
+        self.speed[1] = -self.speed[1]
 
 
         

@@ -1,6 +1,7 @@
 import pygame
 
 BLACK = (0,0,0)
+WHITE = (255, 255, 255)
 
 class Bar(pygame.sprite.Sprite):
 

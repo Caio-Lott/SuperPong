@@ -14,13 +14,13 @@ pygame.display.set_caption("Super Pong")
 icon = pygame.image.load('logo.webp')
 pygame.display.set_icon(icon)
 
-UpperBar = Bar(WHITE, 100, 1)
+UpperBar = Bar(WHITE, 100, 10)
 UpperBar.rect.x = 200
 UpperBar.rect.y = 20
 
-LowerBar = Bar(WHITE, 100, 1)
+LowerBar = Bar(WHITE, 100, 10)
 LowerBar.rect.x = 200
-LowerBar.rect.y = 670
+LowerBar.rect.y = 660
 
 SuperBall = Ball(WHITE, 10, 10)
 SuperBall.rect.x = 245
@@ -82,6 +82,6 @@ while running:
     screen.blit(text, (235,525))
 
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(80)
 
 pygame.quit()
