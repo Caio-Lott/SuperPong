@@ -51,7 +51,7 @@ while running:
     if keys[pygame.K_LEFT]:
         LowerBar.moveLeft(5)
     if keys[pygame.K_RIGHT]:
-        LowerBar.moveRight(5)   
+        LowerBar.moveRight(5) 
 
     SpriteList.update()    
 
@@ -64,7 +64,7 @@ while running:
         SuperBall.speed[1] = -SuperBall.speed[1]
     if SuperBall.rect.y<0:
         scoreLower += 1
-        SuperBall.speed[1] = -SuperBall.speed[1]  
+        SuperBall.speed[1] = -SuperBall.speed[1]
 
     if pygame.sprite.collide_mask(SuperBall, UpperBar) or pygame.sprite.collide_mask(LowerBar,SuperBall):
         SuperBall.hit() 
@@ -80,6 +80,9 @@ while running:
     screen.blit(text, (235,175))
     text = font.render(str(scoreLower), 1, WHITE)
     screen.blit(text, (235,525))
+
+    if scoreLower == 10 or scoreUpper == 10:
+        running = False
 
     pygame.display.flip()
     clock.tick(80)
