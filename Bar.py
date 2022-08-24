@@ -4,11 +4,14 @@ BLACK = (0,0,0)
 
 class Bar(pygame.sprite.Sprite):
 
-    def __init__(self, color, widht, height):
+    def __init__(self, color, width, height):
         super().__init__()
-        self.image = pygame.Surface([widht, height])
+        self.image = pygame.Surface([width, height])
         self.image.fill(BLACK)
-        pygame.draw.rect(self.image, color, [0, 0, widht, height])
+        self.image.set_colorkey(BLACK)
+
+        pygame.draw.rect(self.image, color, [0, 0, width, height])
+
         self.rect = self.image.get_rect()
 
     def moveLeft(self, pixels):

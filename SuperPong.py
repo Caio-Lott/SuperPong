@@ -14,11 +14,11 @@ pygame.display.set_caption("Super Pong")
 icon = pygame.image.load('logo.webp')
 pygame.display.set_icon(icon)
 
-UpperBar = Bar(WHITE, 100, 10)
+UpperBar = Bar(WHITE, 100, 1)
 UpperBar.rect.x = 200
 UpperBar.rect.y = 20
 
-LowerBar = Bar(WHITE, 100, 10)
+LowerBar = Bar(WHITE, 100, 1)
 LowerBar.rect.x = 200
 LowerBar.rect.y = 670
 
@@ -56,18 +56,18 @@ while running:
     SpriteList.update()    
 
     if SuperBall.rect.x>=490:
-        SuperBall.speed[1] = -SuperBall.speed[1]
+        SuperBall.speed[0] = -SuperBall.speed[0]
     if SuperBall.rect.x<=0:
-        SuperBall.speed[1] = -SuperBall.speed[1]
+        SuperBall.speed[0] = -SuperBall.speed[0]
     if SuperBall.rect.y>690:
         scoreUpper += 1
-        SuperBall.speed[0] = -SuperBall.speed[0]
+        SuperBall.speed[1] = -SuperBall.speed[1]
     if SuperBall.rect.y<0:
         scoreLower += 1
-        SuperBall.speed[0] = -SuperBall.speed[0]  
+        SuperBall.speed[1] = -SuperBall.speed[1]  
 
-    if pygame.sprite.collide_mask(SuperBall, UpperBar) or pygame.sprite.collide_mask(SuperBall, LowerBar):
-        SuperBall.hit()
+    if pygame.sprite.collide_mask(SuperBall, UpperBar) or pygame.sprite.collide_mask(LowerBar,SuperBall):
+        SuperBall.hit() 
 
     screen.fill(BLACK)
 
