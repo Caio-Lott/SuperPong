@@ -23,7 +23,7 @@ LowerBar.rect.x = 200
 LowerBar.rect.y = 670
 
 SuperBall = Ball(WHITE, 10, 10)
-SuperBall.rect.x = 195
+SuperBall.rect.x = 245
 SuperBall.rect.y = 345
 
 SpriteList = pygame.sprite.Group()
@@ -55,14 +55,14 @@ while running:
 
     SpriteList.update()    
 
-    if SuperBall.rect.y>690:
-        SuperBall.speed[1] = -SuperBall.speed[1]
-    if SuperBall.rect.y<0:
-        SuperBall.speed[1] = -SuperBall.speed[1]
     if SuperBall.rect.x>=490:
+        SuperBall.speed[1] = -SuperBall.speed[1]
+    if SuperBall.rect.x<=0:
+        SuperBall.speed[1] = -SuperBall.speed[1]
+    if SuperBall.rect.y>690:
         scoreUpper += 1
         SuperBall.speed[0] = -SuperBall.speed[0]
-    if SuperBall.rect.x<=0:
+    if SuperBall.rect.y<0:
         scoreLower += 1
         SuperBall.speed[0] = -SuperBall.speed[0]  
 
